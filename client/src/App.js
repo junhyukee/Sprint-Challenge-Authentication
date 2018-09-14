@@ -1,14 +1,57 @@
 import React, { Component } from 'react';
+import { withRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './actions';
 import './App.css';
+import Login from './components/Login';
+import Register from './components/Register';
+import Jokes from './components/Jokes';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Test</h1>
+        <Route
+          path="/login"
+          render={props => (
+            <Login {...props} loginUser={this.props.loginUser} />
+          )}
+        />
+        <Route
+          path="/register"
+          render={props => (
+            <Register {...props} registerUser={this.props.registerUser} />
+          )}
+        />
+        <Route
+          path="/jokes"
+          render={props => (
+            <Jokes
+              {...props}
+              fetchJokes={this.props.fetchJokes}
+              jokes={this.props.jokes}
+            />
+          )}
+        />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    registeringUser: state.registeringUser,
+    loggingInUser: state.loggingInUser,
+    fetchingJokes: state.fetchingJokes,
+    loggingOutUser: state.loggingOutUser,
+    jokes: state.jokes,
+    error: state.error
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    actions
+  )(App)
+);

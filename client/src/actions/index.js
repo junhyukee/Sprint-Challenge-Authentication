@@ -50,7 +50,7 @@ export const fetchJokes = token => {
   return dispatch => {
     dispatch({ type: FETCHING_JOKES });
     axios
-      .get(`${url}/users`, { headers: { Authorization: token } })
+      .get(`${url}/jokes`, { headers: { Authorization: token } })
       .then(res => {
         dispatch({ type: FETCHED_JOKES, payload: res.data });
       })
