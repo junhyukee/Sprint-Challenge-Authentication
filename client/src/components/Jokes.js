@@ -9,7 +9,7 @@ const styles = {
     marginTop: '2rem',
     display: 'grid',
     justifyContent: 'center',
-    'grid-template-columns': '30% 30%',
+    'grid-template-columns': '40% 40%',
     'grid-gap': '20px 20px'
   }
 };
@@ -31,7 +31,6 @@ class Jokes extends Component {
                 <CardContent>
                   <Typography variant="headline">{joke.setup}</Typography>
                   <Typography variant="subheading">{joke.punchline}</Typography>
-                  <Typography variant="caption">{joke.type}</Typography>
                 </CardContent>
               </Card>
             );

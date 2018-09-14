@@ -6,11 +6,16 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Jokes from './components/Jokes';
+import Nav from './components/Nav';
 
 class App extends Component {
+  onLogout = () => {
+    this.props.logoutUser(this.props.history);
+  };
   render() {
     return (
       <div className="App">
+        <Nav onLogout={this.onLogout} />
         <Route
           path="/login"
           render={props => (
