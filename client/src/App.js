@@ -41,7 +41,7 @@ class App extends Component {
             vertical: 'top',
             horizontal: 'center'
           }}
-          style={{ width: '40%' }}
+          style={{ width: '40%', marginLeft: 'auto', marginRight: 'auto' }}
           open={this.state.open}
           onClose={this.handleClose}
           autoHideDuration={3000}
