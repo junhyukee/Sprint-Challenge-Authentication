@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import * as actions from './actions';
 import './App.css';
 import Login from './components/Login';
@@ -9,13 +11,48 @@ import Jokes from './components/Jokes';
 import Nav from './components/Nav';
 
 class App extends Component {
+  state = {
+    open: false
+  };
+  componentDidUpdate(prevProps) {
+    if (prevProps.error !== this.props.error) {
+      this.setState({ open: true });
+    }
+  }
+
   onLogout = () => {
     this.props.logoutUser(this.props.history);
   };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
+
   render() {
     return (
       <div className="App">
         <Nav onLogout={this.onLogout} />
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center'
+          }}
+          style={{ width: '40%' }}
+          open={this.state.open}
+          onClose={this.handleClose}
+          autoHideDuration={3000}
+        >
+          <SnackbarContent
+            style={{ backgroundColor: '#D32F2F' }}
+            aria-describedby="message-id"
+            message={<span id="message-id">{this.props.error}</span>}
+          />
+        </Snackbar>
+
         <Route
           path="/login"
           render={props => (
